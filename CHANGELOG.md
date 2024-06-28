@@ -9,6 +9,21 @@
 
 ### Unreleased
 
+### Version 1.65
+
+* Prevent addon.d script from being executed during A/B OTA updates when installed as a Magisk module ([PR #558 @harinworks])
+* Log boot script output to logcat ([PR #560 @chenxiaolong])
+* Fix removal of restrictions for `READ_CALL_LOG` permission on Android 14 QPR3 ([PR #561 @chenxiaolong])
+
+### Version 1.64
+
+* Add Arabic and Urdu translations ([PR #550 @TheDeathDragon])
+* Add Japanese translations ([PR #552 @musenq])
+* Fix race condition when adding record rules if BCR was unloaded from memory while a contact was being selected ([Issue #554], [PR #555 @chenxiaolong])
+* Remove unused internal settings field for the disable battery optimizations option ([PR #556 @chenxiaolong])
+
+### Version 1.63
+
 * Fix removal of restrictions for `READ_CALL_LOG` permission on Android 14 QPR2 ([PR #528 @chenxiaolong])
   * This only affects fresh installs of BCR. Android normally blocks users from granting this permission, even from Android's Settings app. The removal of this restriction now works on Android 14 QPR2 and newer.
 * Update Turkish translations ([PR #521 @symbuzzer])
@@ -16,6 +31,10 @@
 * Add Vietnamese translations ([PR #543 @hdzungx])
 * Fix sysconfig file being deleted during OS upgrades when BCR is installed from recovery ([PR #541 @chenxiaolong])
 * Update all dependencies ([PR #529 @chenxiaolong])
+* Update French translations ([PR #548 @NSO73])
+* Work around bug in some custom ROMs where Android sometimes ignores the sysconfig file needed to access hidden/system APIs ([Issue #539], [Issue #546], [PR #549 @chenxiaolong])
+  * This affected BCR installations that were flashed via recovery or bundled with the ROM.
+  * **NOTE**: Folks bundling BCR into their Android builds should remove the sysconfig file as it is no longer necessary.
 
 ### Version 1.62
 
@@ -612,6 +631,9 @@ Non-user-facing changes:
 [Issue #491]: https://github.com/chenxiaolong/BCR/issues/491
 [Issue #507]: https://github.com/chenxiaolong/BCR/issues/507
 [Issue #513]: https://github.com/chenxiaolong/BCR/issues/513
+[Issue #539]: https://github.com/chenxiaolong/BCR/issues/539
+[Issue #546]: https://github.com/chenxiaolong/BCR/issues/546
+[Issue #554]: https://github.com/chenxiaolong/BCR/issues/554
 [PR #2 @chenxiaolong]: https://github.com/chenxiaolong/BCR/pull/2
 [PR #4 @EleoXDA]: https://github.com/chenxiaolong/BCR/pull/4
 [PR #7 @marat2509]: https://github.com/chenxiaolong/BCR/pull/7
@@ -851,3 +873,12 @@ Non-user-facing changes:
 [PR #540 @phyrz91]: https://github.com/chenxiaolong/BCR/pull/540
 [PR #541 @chenxiaolong]: https://github.com/chenxiaolong/BCR/pull/541
 [PR #543 @hdzungx]: https://github.com/chenxiaolong/BCR/pull/543
+[PR #548 @NSO73]: https://github.com/chenxiaolong/BCR/pull/548
+[PR #549 @chenxiaolong]: https://github.com/chenxiaolong/BCR/pull/549
+[PR #550 @TheDeathDragon]: https://github.com/chenxiaolong/BCR/pull/550
+[PR #552 @musenq]: https://github.com/chenxiaolong/BCR/pull/552
+[PR #555 @chenxiaolong]: https://github.com/chenxiaolong/BCR/pull/555
+[PR #556 @chenxiaolong]: https://github.com/chenxiaolong/BCR/pull/556
+[PR #558 @harinworks]: https://github.com/chenxiaolong/BCR/pull/558
+[PR #560 @chenxiaolong]: https://github.com/chenxiaolong/BCR/pull/560
+[PR #561 @chenxiaolong]: https://github.com/chenxiaolong/BCR/pull/561

@@ -118,6 +118,7 @@ android {
         versionCode = gitVersionCode
         versionName = gitVersionName
         resourceConfigurations.addAll(listOf(
+            "ar",
             "de",
             "en",
             "es",
@@ -125,11 +126,13 @@ android {
             "hi",
             "it",
             "iw",
+            "ja",
             "pl",
             "pt-rPT",
             "ru",
             "sk",
             "tr",
+            "ur",
             "uk",
             "vi",
             "zh-rCN",
@@ -299,22 +302,6 @@ android.applicationVariants.all {
         }
     }
 
-    val configXml = tasks.register("configXml${capitalized}") {
-        inputs.property("variant.applicationId", variant.applicationId)
-
-        val outputFile = variantDir.map { it.file("config-${variant.applicationId}.xml") }
-        outputs.file(outputFile)
-
-        doLast {
-            outputFile.get().asFile.writeText("""
-                <?xml version="1.0" encoding="utf-8"?>
-                <config>
-                    <hidden-api-whitelisted-app package="${variant.applicationId}" />
-                </config>
-            """.trimIndent())
-        }
-    }
-
     val addonD = tasks.register("addonD${capitalized}") {
         inputs.property("variant.applicationId", variant.applicationId)
 
@@ -328,7 +315,6 @@ android.applicationVariants.all {
             "priv-app/${variant.applicationId}/${it.outputFile.name}"
         } + listOf(
             "etc/permissions/privapp-permissions-${variant.applicationId}.xml",
-            "etc/sysconfig/config-${variant.applicationId}.xml",
         )
 
         doLast {
@@ -375,9 +361,6 @@ android.applicationVariants.all {
         from(permissionsXml.map { it.outputs }) {
             into("system/etc/permissions")
         }
-        from(configXml.map { it.outputs }) {
-            into("system/etc/sysconfig")
-        }
         from(variant.outputs.map { it.outputFile }) {
             into("system/priv-app/${variant.applicationId}")
         }
@@ -393,6 +376,7 @@ android.applicationVariants.all {
         from(File(magiskDir, "boot_common.sh"))
         from(File(magiskDir, "post-fs-data.sh"))
         from(File(magiskDir, "service.sh"))
+        from(File(magiskDir, "customize.sh"))
 
         from(File(rootDir, "LICENSE"))
         from(File(rootDir, "README.md"))
